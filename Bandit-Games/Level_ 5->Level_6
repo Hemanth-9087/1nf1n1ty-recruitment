@@ -1,0 +1,19 @@
+The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:
+human-readable
+1033 bytes in size
+not executable
+
+1. ls
+2. cd inhere
+3. find . -type f -exec sh -c 'file -- "{}" && du -b "{}"' \;
+
+     "find . -type f": Finds all files starting from the current directory (.) and its subdirectories.
+     "-exec sh -c": Executes the following shell command for each file.
+     "  'file -- "{}" && du -b "{}"'  ": -- is used so that files that start with - are also processed correctly, 
+      && : AND operator
+      "du" : disk usae -b means in bytes 
+       {}-- means for every file that is found this should be executed.
+
+4. We will the file that satisfies the above conditions
+
+HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
