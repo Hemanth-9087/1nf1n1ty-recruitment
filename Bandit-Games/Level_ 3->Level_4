@@ -1,0 +1,7 @@
+The password for the next level is stored in a hidden file in the inhere directory.
+
+1. cd inhere
+2. ls -a (-a is used to list all the files including the hidden files)
+
+Note
+Files starting with . are hidden in linux based systems
