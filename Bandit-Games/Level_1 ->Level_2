@@ -1,0 +1,8 @@
+The password for the next level is stored in a file called - located in the home directory
+
+1.ls 
+2.cat ./-  (the ./  tells the shell that you are referring to the file in the current directory)
+
+Note:
+cat - 
+This command doesnt work because  '-' is interpreted as an option to the command
