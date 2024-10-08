@@ -1,1 +1,31 @@
+Level0 :
 
+Commands used : 
+1. `ssh bandit0@bandit.labs.overthewire.org -p 2220`
+2. `cat readme`
+
+Explanation : In this level, we connect to the remote server of 0th level using SSH and enter the given password (bandit0). Then we use "cat" command to read the "readme" file, in which we get the password to the Level1.
+
+Password For Next Level : `ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If`
+
+
+Level0 -> Level1 :
+
+Command(s) used : 
+1. `ssh bandit1@bandit.labs.overthewire.org -p 2220`
+2. `cat ./-`
+
+Explanation : We connect to the server using SSH and enter the password for Level1. We find a "dash" file, and to read it, we use the command `cat ./-` and get the password to Level2.
+
+Password For Next Level : `263JGJPfgU6LtdEvgfWU1XP5yac29mFx`
+
+
+Level1 -> Level2 :
+
+Command(s) used : 
+1. `ssh bandit1@bandit.labs.overthewire.org -p 2220`
+2. `cat ./-`
+
+Explanation : We connect to the server using SSH and enter the password for Level1. We find a "dash" file, and to read it, we use the command `cat ./-` and get the password to Level2.
+
+Password For Next Level : `263JGJPfgU6LtdEvgfWU1XP5yac29mFx`
