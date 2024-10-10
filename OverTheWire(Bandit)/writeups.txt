@@ -1,1 +1,610 @@
+Level0 -> Level1 :
 
+Commands used : 
+1. `ssh bandit0@bandit.labs.overthewire.org -p 2220`
+2. `cat readme`
+
+Explanation : In this level, we connect to the remote server of 0th level using SSH and enter the given password (bandit0). Then we use "cat" command to read the "readme" file, in which we get the password to the Level1.
+
+Password For Next Level : `ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If`
+
+
+
+Level1 -> Level2 :
+
+Command(s) used : 
+1. `ssh bandit1@bandit.labs.overthewire.org -p 2220`
+2. `cat ./-`
+
+Explanation : We connect to the server using SSH and enter the password for Level1. We find a "dash" file, and to read it, we use the command `cat ./-` and get the password to Level2.
+
+Password For Next Level : `263JGJPfgU6LtdEvgfWU1XP5yac29mFx`
+
+
+
+Level2 -> Level3 :
+
+Command(s) used : 
+1. `ssh bandit2@bandit.labs.overthewire.org -p 2220`
+2. `cat "spaces in this filename"`
+
+Explanation : We connect to the server using SSH and enter the password for Level2. We find a file, which has spaces in it so we will put the file name  double quotes ` "" `to read it, we use the command ` cat "spaces in this filename" ` and get the password to Level3.
+
+Password For Next Level : `MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx`
+
+
+
+Level3 -> Level4 :
+
+Command(s) used : 
+1. `ssh bandit3@bandit.labs.overthewire.org -p 2220`
+2. `cd inhere`
+3. `ls -a`
+4. `cat "...Hiding-From-You"`
+
+Explanation : We connect to the server using SSH and enter the password for Level3. We go into inhere directory using cd command. we use ls -a to list all the files including hidden ones, to read the file, we use the command ` cat "...Hiding-From-You" ` and get the password to Level4.
+
+Password For Next Level : `2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ`
+
+
+
+Level4 -> Level5 :
+
+Command(s) used : 
+1. `ssh bandit4@bandit.labs.overthewire.org -p 2220`
+2. `cd inhere`
+3. `ls`
+4. `file ./-file07`
+5. `cat ./-file07`
+
+Explanation : We connect to the server using SSH and enter the password for Level4. We go into inhere directory using cd command. we use ls to list all the files, to find the type of the file we use the command `file ./-file07`. This is the only file with readable text(ASCII text) to read the file, we use the command `cat ./-file07` and get the password to Level5.
+
+Password For Next Level : `4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw`
+
+
+
+Level5 -> Level6 :
+
+Command(s) used : 
+1. `ssh bandit5@bandit.labs.overthewire.org -p 2220`
+2. `cd inhere`
+3. `find . -type f -exec sh -c 'file -- "{}" && du -b "{}"' \;`
+4. `cat ./maybehere07/.file2`
+
+Explanation : We connect to the server using SSH and enter the password for Level5. We go into inhere directory using cd command. we use ls to list all the directories, to find the file that satisfies our exact conditions we use the command `find . -type f -exec sh -c 'file -- "{}" && du -b "{}"' \;`. 
+"find . -type f": Finds all files starting from the current directory (.) and its subdirectories.
+"-exec sh -c": Executes the following shell command for each file.
+" 'file -- "{}" && du -b "{}"'  ": -- is used so that files that start with - are also processed correctly, 
+&& : AND operator
+"du" : disk usage -b means in bytes 
+{} means for every file that is found this should be executed.
+we use the command `cat ./maybehere07/.file2` and get the password to Level6.
+
+Password For Next Level : `HWasnPhtq9AVKe0dmk45nxy20cvUa6EG`
+
+
+
+Level6 -> Level7 :
+
+Command(s) used : 
+1. `ssh bandit6@bandit.labs.overthewire.org -p 2220`
+2. `find / -user bandit7 -group bandit6 -size 33c 2>/dev/null`
+3. `cat /var/lib/dpkg/info/bandit7.password`
+
+Explanation : We connect to the server using SSH and enter the password for Level6.
+given that, the files is somewhere in the server. we use this command 
+`find / -user bandit7 -group bandit6 -size 33c 2>/dev/null`
+find / means start searching from the root folder 
+for a file which is owned by the user bandit7 and :: -user bandit7
+owned by the group bandit7 :: -group bandit6
+and whose size is 33 bytes   :: -size 33c
+if we dont have persmissions to view a folder or file we get an error
+that is represented by 2 it is send to a folder null which just ignores it and doesnt print anything.
+we use the command `cat /var/lib/dpkg/info/bandit7.password` and get the password to Level7.
+
+Password For Next Level : `morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj`
+
+
+
+Level7 -> Level8 :
+
+Command(s) used : 
+1. `ssh bandit7@bandit.labs.overthewire.org -p 2220`
+2. `ls`
+3. `grep millionth data.txt`
+
+Explanation : We connect to the server using SSH and enter the password for Level7.
+we use this command `grep millionth data.txt`-- this prints the line with the word millionth
+get the password to Level8.
+
+Password For Next Level : `dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc`
+
+
+
+Level8 -> Level9 :
+
+Command(s) used : 
+1. `ssh bandit8@bandit.labs.overthewire.org -p 2220`
+2. `ls`
+3. `sort data.txt | uniq -u`
+
+Explanation : We connect to the server using SSH and enter the password for Level8.
+we use this command `sort data.txt | uniq -u`
+sorts the lines in alphabetical order and uniq -u prints all the lines that occurs only once
+and get the password to Level9.
+
+Password For Next Level : `4CKMh1JI91bUIZZPXDqGanal4xvAg0JM`
+
+
+
+Level9 -> Level10 :
+
+Command(s) used : 
+1. `ssh bandit9@bandit.labs.overthewire.org -p 2220`
+2. `ls`
+3. `strings data.txt | grep "===="`
+
+Explanation : We connect to the server using SSH and enter the password for Level9.
+we use this command `strings data.txt | grep "===="`
+this command extracts readable strings  and it's output is sent to grep and it prints the line with `===` and get the password to Level10.
+
+Password For Next Level : `FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey`
+
+
+
+Level10 -> Level11 :
+
+Command(s) used : 
+1. `ssh bandit10@bandit.labs.overthewire.org -p 2220`
+2. `ls`
+3. `base64 --decode data.txt`
+
+Explanation : We connect to the server using SSH and enter the password for Level10.
+we use this command `base64 --decode data.txt`
+This command decodes the base64 content and get the password to Level11.
+
+Password For Next Level : `dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr`
+
+
+
+Level11 -> Level12 :
+
+Command(s) used : 
+1. `ssh bandit11@bandit.labs.overthewire.org -p 2220`
+2. `ls`
+3. `tr 'A-Za-z' 'N-ZA-Mn-za-m' < data.txt`
+
+Explanation : We connect to the server using SSH and enter the password for Level11.
+we use This command `tr 'A-Za-z' 'N-ZA-Mn-za-m' < data.txt`  tr means translate, it applies the ROT13 cipher to the contents of data.txt. It shifts each letter by 13 positions in the alphabet 
+and prints the output. We get the password to Level12.
+
+Password For Next Level : `7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4`
+
+
+
+Level12 -> Level13 :
+
+Command(s) used : 
+1. `ssh bandit12@bandit.labs.overthewire.org -p 2220`
+2. `mktemp -d` 
+3. `cp data.txt /tmp/tmp.f4oijzLftw/`
+4. `cd /tmp/tmp.f4oijzLftw/`
+5. `mv data.txt data.hex` 
+6. `xxd -r data.hex > data.bin` 
+7. `file data.bin` 
+8. `mv data.bin data.gz` 
+9. `gunzip data.gz` 
+10. `ls`
+11. `file data` 
+12. `mv data data.bz2` 
+13. `bunzip2 data.bz2` 
+14. `file data`
+15. `mv data data.gz`
+16. `gunzip data.gz`
+17. `file data`
+18. `tar -xf data`
+19. `file data5.bin`
+20. `tar -xf data5.bin`
+21. `file data6.bin`
+22. `mv data6.bin data6.bz2`
+23. `bunzip2 data6.bz2`
+24. `file data6`
+25. `tar -xf data6`
+26. `file data8.bin`
+27. `mv data8.bin data8.gz`
+28. `gunzip data8.gz`
+29. `file data8`
+30. `cat data8`
+
+Explanation : We connect to the server using SSH and enter the password for Level12.
+`mktemp -d` to create a directory(folder) at /tmp/  o/p ---  /tmp/tmp.f4oijzLftw/
+`cp data.txt /tmp/tmp.f4oijzLftw/` to copy our data.txt file to that folder
+`mv data.txt data.hex` change the extension to .hex (optional)
+`xxd -r data.hex > data.bin` to get the binary file from the hex dump xxd is use to create a hex dump -r is for reverse
+`file data.bin`  to get the type of compression
+`mv data.bin data.gz` changing the extension to use gunzip
+`mv data data.bz2` changing the extension to bz2 to use bunzip2
+after numerous decompressing 
+`file data` we get it as POSIX tar archive (GNU) archives are used to group files and directories into a single folder 
+`tar -xf data` extract the contents of the file data which is a tar archive
+it then gives us data6.bin ,and after multiple decompressions and extractions we get our final file data8(ASCII text) with our password 
+
+Password For Next Level : `FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn`
+
+
+
+Level13 -> Level14 :
+
+Command(s) used : 
+1. `ssh bandit13@bandit.labs.overthewire.org -p 2220`
+2. `ls` 
+3. `cat sshkey.private`(optional)
+4. `ssh -i sshkey.private bandit14@localhost -p 2220`
+5. `cat /etc/bandit_pass/bandit14` 
+
+Explanation : We connect to the server using SSH and enter the password for Level13.
+when we run `ls` we see that there is file sshkey.private which contains the private key which is used to connect to the bandit14 user. because when we try to open the file `/etc/bandit_pass/bandit14` we get access denied because we are currently in bandit13 user.
+this command `ssh -i sshkey.private bandit14@localhost -p 2220` is used to connect to another user in the same host(we are already in the bandit server, so we are using localhost here) -i means identify the file (sshkey.private). after this we would enter the bandit14 user now we can run the command `cat /etc/bandit_pass/bandit14` to get the password.
+
+Password For Next Level : `MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS`
+
+
+
+Level14 -> Level15 :
+
+Command(s) used : 
+1. `ssh bandit14@bandit.labs.overthewire.org -p 2220`
+2. `echo "MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS" | nc localhost 30000` 
+
+Explanation : We connect to the server using SSH and enter the password for Level14.
+`echo` command is used to print something , the ` | ` command is used to send the output of the echo to the next command that is `nc localhost 30000`, nc (netcat) we use it to connect to ports of a server , here the server is localhost since we are already on the bandit server) run this to get the password.
+
+Password For Next Level : `8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo`
+
+
+
+Level15 -> Level16 :
+
+Command(s) used : 
+1. `ssh bandit15@bandit.labs.overthewire.org -p 2220`
+2. `openssl s_client -connect localhost:30001` 
+3. Enter this `8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo`
+
+Explanation : We connect to the server using SSH and enter the password for Level15.
+`openssl s_client -connect localhost:30001` command is used to connect to the port 30001 on the localhost, using SSL/TLS encryption (`s_client`). After the connection enter the current level password `8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo` to get the password
+
+Password For Next Level : `kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx`
+
+
+
+Level16 -> Level17 :
+
+Command(s) used : 
+1. `ssh bandit16@bandit.labs.overthewire.org -p 2220`
+2. `for port in $(seq 31000 32000); do
+  nc -zv localhost $port 2>&1 | grep succeeded;
+done`
+3. `openssl s_client -ign_eof localhost:31790` 
+4. Enter this `kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx`
+
+Explanation : We connect to the server using SSH and enter the password for Level16.
+`for port in $(seq 31000 32000); do
+  nc -zv localhost $port 2>&1 | grep succeeded;
+done` command is used to find ports open on the localhost from 31000 to 320000, using `openssl s_client -ign_eof localhost:31790`8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo` use to find which port uses SSL/TLS (to prevent KEYUPDATE we use -ign_eof ignore end of file) and enter `kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx` to get the password
+
+Credentials For Next Level : 
+-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEAvmOkuifmMg6HL2YPIOjon6iWfbp7c3jx34YkYWqUH57SUdyJ
+imZzeyGC0gtZPGujUSxiJSWI/oTqexh+cAMTSMlOJf7+BrJObArnxd9Y7YT2bRPQ
+Ja6Lzb558YW3FZl87ORiO+rW4LCDCNd2lUvLE/GL2GWyuKN0K5iCd5TbtJzEkQTu
+DSt2mcNn4rhAL+JFr56o4T6z8WWAW18BR6yGrMq7Q/kALHYW3OekePQAzL0VUYbW
+JGTi65CxbCnzc/w4+mqQyvmzpWtMAzJTzAzQxNbkR2MBGySxDLrjg0LWN6sK7wNX
+x0YVztz/zbIkPjfkU1jHS+9EbVNj+D1XFOJuaQIDAQABAoIBABagpxpM1aoLWfvD
+KHcj10nqcoBc4oE11aFYQwik7xfW+24pRNuDE6SFthOar69jp5RlLwD1NhPx3iBl
+J9nOM8OJ0VToum43UOS8YxF8WwhXriYGnc1sskbwpXOUDc9uX4+UESzH22P29ovd
+d8WErY0gPxun8pbJLmxkAtWNhpMvfe0050vk9TL5wqbu9AlbssgTcCXkMQnPw9nC
+YNN6DDP2lbcBrvgT9YCNL6C+ZKufD52yOQ9qOkwFTEQpjtF4uNtJom+asvlpmS8A
+vLY9r60wYSvmZhNqBUrj7lyCtXMIu1kkd4w7F77k+DjHoAXyxcUp1DGL51sOmama
++TOWWgECgYEA8JtPxP0GRJ+IQkX262jM3dEIkza8ky5moIwUqYdsx0NxHgRRhORT
+8c8hAuRBb2G82so8vUHk/fur85OEfc9TncnCY2crpoqsghifKLxrLgtT+qDpfZnx
+SatLdt8GfQ85yA7hnWWJ2MxF3NaeSDm75Lsm+tBbAiyc9P2jGRNtMSkCgYEAypHd
+HCctNi/FwjulhttFx/rHYKhLidZDFYeiE/v45bN4yFm8x7R/b0iE7KaszX+Exdvt
+SghaTdcG0Knyw1bpJVyusavPzpaJMjdJ6tcFhVAbAjm7enCIvGCSx+X3l5SiWg0A
+R57hJglezIiVjv3aGwHwvlZvtszK6zV6oXFAu0ECgYAbjo46T4hyP5tJi93V5HDi
+Ttiek7xRVxUl+iU7rWkGAXFpMLFteQEsRr7PJ/lemmEY5eTDAFMLy9FL2m9oQWCg
+R8VdwSk8r9FGLS+9aKcV5PI/WEKlwgXinB3OhYimtiG2Cg5JCqIZFHxD6MjEGOiu
+L8ktHMPvodBwNsSBULpG0QKBgBAplTfC1HOnWiMGOU3KPwYWt0O6CdTkmJOmL8Ni
+blh9elyZ9FsGxsgtRBXRsqXuz7wtsQAgLHxbdLq/ZJQ7YfzOKU4ZxEnabvXnvWkU
+YOdjHdSOoKvDQNWu6ucyLRAWFuISeXw9a/9p7ftpxm0TSgyvmfLF2MIAEwyzRqaM
+77pBAoGAMmjmIJdjp+Ez8duyn3ieo36yrttF5NSsJLAbxFpdlc1gvtGCWW+9Cq0b
+dxviW8+TFVEBl1O4f7HVm6EpTscdDxU+bCXWkfjuRb7Dy9GOtt9JPsX8MBTakzh3
+vBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=
+-----END RSA PRIVATE KEY-----
+
+
+
+Level17 -> Level18 :
+
+Command(s) used : 
+1. `ssh -i bandit_key bandit17@bandit.labs.overthewire.org -p 2220`
+2. `diff passwords.old passwords.new`
+
+Explanation : We connect to the server using the private key(it is saved in the file bandit_key in local system) for Level17.`diff passwords.old passwords.new` command is used to compare the two files and print the difference 
+
+Password For Next Level : `x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO`
+
+
+
+Level18 -> Level19 :
+
+Command(s) used : 
+1. `ssh bandit18@bandit.labs.overthewire.org -p 2220 "sh -c 'cat ~/readme'"`
+
+Explanation : To solve this challenge we shouldn't run .bashrc file , which is always run when a new terminal session is created. so, without creating an interactive terminal session. we will try to get the info from a single command `ssh bandit18@bandit.labs.overthewire.org -p 2220 "sh -c 'cat ~/readme'"` the "sh -c 'cat ~/readme'" this creates a new shell instead of the default , we do this because to get access to the cat command -c means run the following command `~` represents current directory. when we run it we will get the password
+
+Password For Next Level : `cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8`
+
+
+
+Level19 -> Level20 :
+
+Command(s) used : 
+1. `ssh bandit19@bandit.labs.overthewire.org -p 2220`
+2. `./bandit20-do`
+3. `./bandit20-do cat /etc/bandit_pass/bandit20`
+
+Explanation : We connect to the server using SSH and enter the password for Level19. when we run this `./bandit20` we can see the format of how to run this.So, we run `./bandit20-do cat /etc/bandit_pass/bandit20` to get the password
+
+Password For Next Level : `0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO`
+
+
+
+Level20 -> Level21 :
+
+Command(s) used : 
+1. `ssh bandit20@bandit.labs.overthewire.org -p 2220`
+2. `nc -l -p 12345` and type `0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO` 
+In another command promt window  
+3. `ssh bandit20@bandit.labs.overthewire.org -p 2220`
+4. `./suconnect 12345`
+
+Explanation : We connect to the server using SSH and enter the password for Level20.we run this `nc -l -p 12345` to listen on port 12345 then enter `0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO`. Then open another terminal window connect to the server again and  using the setuid file `./suconnect 12345`. now this reads the previous password and sends the next password to the listening terminal.
+
+Password For Next Level : `EeoULMCra2q0dSkYj561DX7s1CpBuOBt`
+
+
+
+Level21 -> Level22 :
+
+Command(s) used : 
+1. `ssh bandit21@bandit.labs.overthewire.org -p 2220`
+2. `cd /etc/cron.d/` 
+3. `cat cronjob_bandit22`
+4. `cat /usr/bin/cronjob_bandit22.sh`
+5. `cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv`
+
+Explanation : We connect to the server using SSH and enter the password for Level21. go to the `/etc/cron.d/` directory there run this command `cat cronjob_bandit22` since we want password for the 22nd level. we can see that there is a repeating process every minute so using `cat /usr/bin/cronjob_bandit22.sh` we can see that a file is being create in the `tmp` folder. so 
+`cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv` gives the contents of the file which is our password
+
+Password For Next Level : `tRae0UfB9v0UzbCdn9cY0gQnds9GF58Q`
+
+
+
+Level22 -> Level23 :
+
+Command(s) used : 
+1. `ssh bandit22@bandit.labs.overthewire.org -p 2220`
+2. `cd /etc/cron.d/` 
+3. `cat cronjob_bandit23`
+4. `cat /usr/bin/cronjob_bandit23.sh`
+5. `echo "I am user bandit23" | md5sum | cut -d ' ' -f 1`
+6. `cat /tmp/8ca319486bfbbc3663ea0fbe81326349`
+
+Explanation : We connect to the server using SSH and enter the password for Level22. go to the `/etc/cron.d/` directory there run this command `cat cronjob_bandit23` since we want password for the 23rd level. we can see that there is a repeating process every minute so using `cat /usr/bin/cronjob_bandit22.sh` we can see that a file is being create in the `tmp` folder. Name of the file is obtained from `echo "I am user bandit23" | md5sum | cut -d ' ' -f 1`. md5 sum is calculated for the given string and `-f 1` extracts the first field. so using the obtained file name 
+`cat /tmp/8ca319486bfbbc3663ea0fbe81326349` gives the contents of the file which is our password
+
+Password For Next Level : `0Zf11ioIjMVN551jX3CmStKLYqjk54Ga`
+
+
+
+Level23 -> Level24 :
+
+Command(s) used : 
+1. `ssh bandit23@bandit.labs.overthewire.org -p 2220`
+2. `cd /etc/cron.d/` 
+3. `cat cronjob_bandit24`
+4. `cat /usr/bin/cronjob_bandit24.sh`
+5. `mktemp -d`
+6. `cd /tmp/tmp.ggZDOGWEM8`
+7. `touch password`
+8. `echo '#!/bin/bash' > script.sh`
+9. `echo 'cat /etc/bandit_pass/bandit24 > /tmp/tmp.ggZDOGWEM8/password' >> script.sh`
+10. `cp script.sh /var/spool/bandit24/foo`
+11. `cat password`
+
+Explanation : We connect to the server using SSH and enter the password for Level23. go to the `/etc/cron.d/` directory there run this command `cat cronjob_bandit24` since we want password for the 24rd level. we can see that there is a repeating process every minute so using `cat /usr/bin/cronjob_bandit24.sh` we can see that all files that are created by bandit23 are run. So, create a temp folder `mktemp -d`. `cd /tmp/tmp.ggZDOGWEM8` go to the temporary folder and create a password file and script.sh file with the contents above. later give permissions. then copy the folder to the destination `echo 'cat /etc/bandit_pass/bandit24 > /tmp/tmp.ggZDOGWEM8/password'. after a minute we get our password from this `cat /tmp/tmp.ggZDOGWEM8/password` gives the contents of the file which is our password
+
+Password For Next Level : `gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8`
+
+
+
+Level24 -> Level25 :
+
+Command(s) used : 
+1. `ssh bandit24@bandit.labs.overthewire.org -p 2220`
+2. `for i in $(seq -w 0000 9999); 
+    do
+         echo "gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8 $i" >> combinations.txt
+    done` 
+3. `cat combinations.txt | nc localhost 30002 > responses.txt`
+4. `cat responses.txt | grep -v "Wrong!"`
+
+Explanation : We connect to the server using SSH and enter the password for Level24. run the given script.  it gives us a file with all the inputs that needs to be sent. `cat combinations.txt | nc localhost 30002 > responses.txt` this command sends everyline to the server and stores the response in `responses .txt`. `cat responses.txt | grep -v "Wrong!" using this command we get the lines where the word `Wrong!` is not present. there we can find the password
+
+Password For Next Level : `iCi86ttT4KSNe1armKiwbQNmB3YJP3q4`
+
+
+
+Level25 -> Level26 :
+
+Command(s) used : 
+1. `ssh bandit25@bandit.labs.overthewire.org -p 2220`
+2. `cat /etc/passwd` 
+3. `cat /usr/bin/showtext`
+4.  reduce the size of the terminal as small as possible
+5. `ssh -i bandit26.sshkey bandit26@localhost -p 2220`
+6.  enter v
+7. `:set shell=/bin/bash`
+8. `:shell`
+9. `cat etc/bandit_pass/bandit26`
+
+Explanation : We connect to the server using SSH and enter the password for Level25. to get more info about the user bandit26 we go to `/etc/passwd`. There we find that default shell is `/usr/bin/showtext`. if we run it we can see a more command. this command is finished only when the whole things are displayed on the terminal. so we reduce the size of the terminal. and run the `ssh -i bandit26.sshkey bandit26@localhost -p 2220. when can see something like "more -- 15%" in the small terminal window now press v to enter vim editor. vim can also run commands using the `:` operator use `:set shell=/bin/bash` to set the shell to bash and run the shell using this `:shell` and press enter twice. Now we are logged in as bandit26 use the  command `cat etc/bandit_pass/bandit26` to get the password of the current user that is bandit23
+
+Password For Next Level : `s0773xxkk0MXfdqOfPRVr9L3jJBUOgCZ`
+
+
+
+Level26 -> Level27 :
+
+Command(s) used : 
+1.  reduce the size of the terminal.
+1. `ssh bandit26@bandit.labs.overthewire.org -p 2220`
+3.  enter v
+4. `:set shell=/bin/bash`
+5. `:shell`
+6. `ls`
+7. `./bandit27-do cat /etc/bandit_pass/bandit27`
+
+Explanation : we reduce the size of the terminal. and run the `ssh bandit26@bandit.labs.overthewire.org -p 2220`. when can see something like "more -- 15%" in the small terminal window now press v to enter vim editor. vim can also run commands using the `:` operator use `:set shell=/bin/bash` to set the shell to bash and run the shell using this `:shell` and press enter twice. Now we are logged in as bandit26. using ls we find that there is a setuid file  use the  command `./bandit27-do cat /etc/bandit_pass/bandit27` to get the password of the bandit27.
+
+Password For Next Level : `upsNCc7vzaRDx6oZC6GiR6ERwe1MowGB`
+
+
+
+Level27 -> Level28 :
+
+Command(s) used : 
+1. `ssh bandit27@bandit.labs.overthewire.org -p 2220`
+2. `mktemp -d`
+3. `cd /tmp/tmp.iil0IBDxKV`
+4. `git clone ssh://bandit27-git@localhost:2220/home/bandit27-git/repo`
+5. `ls`
+6. `cd repo`
+7. `cat README`
+
+Explanation :Run the `ssh bandit27@bandit.labs.overthewire.org -p 2220`. make a temporary directory in `/tmp/`, since we dont have write permissions in the home folder. clone the repository. and open the file `README` in the repo directory to get the password.
+
+Password For Next Level : `Yz9IpL0sBcCeuG7m9uQFt8ZNpS4HZRcN`
+
+
+
+Level28 -> Level29 :
+
+Command(s) used : 
+1. `ssh bandit28@bandit.labs.overthewire.org -p 2220`
+2. `mktemp -d`
+3. `cd /tmp/tmp.Uyk3FPGWzX`
+4. `git clone ssh://bandit28-git@localhost:2220/home/bandit28-git/repo`
+5. `ls`
+6. `cd repo`
+7. `git log`
+8. `git show 3621de89d8eac9d3b64302bfb2dc67e9a566decd`
+
+Explanation :Run the `ssh bandit28@bandit.labs.overthewire.org -p 2220`. make a temporary directory in `/tmp/`, since we dont have write permissions in the home folder. clone the repository. and if open the file `README` the password isn't actually there. So, we see the previous changes made to the repo using the `git log` command. `git show 3621de89d8eac9d3b64302bfb2dc67e9a566decd` when we see more info about this commit we can find the password.
+
+Password For Next Level : `4pT1t5DENaYuqnqvadYs1oE4QLCdjmJ7`
+
+
+
+Level29 -> Level30 :
+
+Command(s) used : 
+1. `ssh bandit29@bandit.labs.overthewire.org -p 2220`
+2. `mktemp -d`
+3. `cd /tmp/tmp.Uyk3FPGWzX`
+4. `git clone ssh://bandit29-git@localhost:2220/home/bandit29-git/repo`
+5. `ls`
+6. `cd repo`
+7. `git branch -a`
+8. `git checkout dev`
+9. `ls`
+10. `cat README.md`
+
+Explanation :Run the `ssh bandit29@bandit.labs.overthewire.org -p 2220`. make a temporary directory in `/tmp/`, since we dont have write permissions in the home folder. clone the repository. and if open the file `README` the password isn't actually there. So, we see the previous changes made to the repo using the `git log` command. But there isn't much useful info in the logs. So, next we see if there are any branches using  `git branch -a` command, here we can see two more branches namely dev and sploits-dev. when we check dev branch using `git checkout dev` and `cat README.md`, we can find the password.
+
+Password For Next Level : `qp30ex3VLz5MDG1n91YowTv4Q8l7CDZL`
+
+
+
+Level30 -> Level31 :
+
+Command(s) used : 
+1. `ssh bandit30@bandit.labs.overthewire.org -p 2220`
+2. `mktemp -d`
+3. `cd /tmp/tmp.BP9j9mwnQv`
+4. `git clone ssh://bandit30-git@localhost:2220/home/bandit30-git/repo`
+5. `ls`
+6. `cd repo`
+7. `git tag`
+8. `git show secret`
+
+Explanation :Run the `ssh bandit30@bandit.labs.overthewire.org -p 2220`. make a temporary directory in `/tmp/`, since we dont have write permissions in the home folder. clone the repository. and if open the file `README` the password isn't actually there. So, we see the previous changes made to the repo using the `git log` command. But there isn't much useful info in the logs. So, next we see if there are any tags `git tag` here we can see a tag namely secret. when we check secret using `git show secret`, we can find the password.
+
+Password For Next Level : `fb5S2xb7bRyFmAvQYQGEqsbhVyJqhnDy`
+
+
+
+Level31 -> Level32 :
+
+Command(s) used : 
+1. `ssh bandit31@bandit.labs.overthewire.org -p 2220`
+2. `mktemp -d`
+3. `cd :/tmp/tmp.IsdMDEiRZl`
+4. `git clone ssh://bandit31-git@localhost:2220/home/bandit31-git/repo`
+5. `ls`
+6. `cd repo`
+7. `cat README.md`
+8. `echo "May I come in?" > key.txt`
+9. `git add -f key.txt`
+10. `git commit -m "Added key.txt with the necessary info"`
+11. `git push origin master`
+
+Explanation :Run the `ssh bandit31@bandit.labs.overthewire.org -p 2220`. make a temporary directory in `/tmp/`, since we dont have write permissions in the home folder. clone the repository. and if open the file `README` it asks us to push a file in the master branch. first we create the file with the given contents `echo "May I come in?" > key.txt`. now we add this file `git add -f key.txt`. -f is used to ignore any warning and add forcefully. A meaningful message will be given for our commit `git commit -m "Added key.txt with the necessary info"`. and finally push it into the master branch of remote repository `git push origin master`. then enter the password of bandit31. we get the next password
+
+Password For Next Level : `3O9RfhqyAlVBEZpVb6LYStshZoqoSx5K`
+
+
+
+Level32 -> Level33 :
+
+Command(s) used : 
+1. `ssh bandit32@bandit.labs.overthewire.org -p 2220`
+2. `$0`
+3. `whoami`
+4. `cat /etc/bandit_pass/bandit33`
+
+Explanation :Run the `ssh bandit32@bandit.labs.overthewire.org -p 2220`. $0 gives us the name of the current script running it will give us a shell, now using `whoami` we can see that we are bandit33 user. This command `cat /etc/bandit_pass/bandit33` gives us the password.
+
+Password For Next Level : `tQdtbs5D5i2vJwkO8mEyYEyTL8izoeJ0`
+
+
+
+Level33 -> Level34 :
+
+Command(s) used : 
+1. `ssh bandit33@bandit.labs.overthewire.org -p 2220`
+2. `ls`
+3. `cat README.txt`
+
+
+Explanation :Run the `ssh bandit32@bandit.labs.overthewire.org -p 2220`. This command `cat README.txt` gives us the final message.
+
+FINAL MESSAGE : 
+Congratulations on solving the last level of this game!
+
+At this moment, there are no more levels to play in this game. However, we are constantly working
+on new levels and will most likely expand this game with more levels soon.
+Keep an eye out for an announcement on our usual communication channels!
+In the meantime, you could play some of our other wargames.
+
+If you have an idea for an awesome new level, please let us know!
