@@ -1,0 +1,241 @@
+
+level1:
+command used: `curl http://127.0.0.1:80`
+
+Explanation: curl means connect to url we can either give the url or the ip address, 80 is the port 
+number ,  which means it uses HTTP.
+
+Flag: `pwn.college{gAgSgMLE2nHzTq4feIe7fT2v6SW.dhjNyMDL1kTM2czW}`
+
+
+level2:
+command used: `echo -e "GET / HTTP/1.0\r\n\r\n" | nc http://127.0.0.1 -p 80`
+
+Explanation: | is a pipeline, it sends the output of the previous command to the next command -e: This option enables interpretation of backslash-escaped characters.
+we are sending a GET request to get the the / (home page) `HTTP/1.0\r\n\r\n` http represents the protocol 1.0 is the version, In HTTP requests, each line is terminated with \r\n.
+
+Flag: `pwn.college{IToIBi_d0LDcCPN7mQhMicCEk6e.dljNyMDL1kTM2czW}`
+
+
+level3:
+Script used:
+import requests
+response = requests.get('http://127.0.0.1:80')
+print(response.text) 
+
+Explanation: requests library is used for sending HTTP/S requests like GET,POST etc.
+
+Flag: `pwn.college{oUNjdHDDsqeJwUt6Of8ASCmp8VH.dBzNyMDL1kTM2czW}`
+
+
+level4:
+commands used:
+1. `curl 127.0.0.1:80`
+2. `curl -H "Host: f713e34175eed12851b25e25e708423d" 127.0.0.1:80` 
+
+Explanation: running `curl 127.0.0.1:80` gives us a message saying that incorrect host and gives us the host to use here it is `f713e34175eed12851b25e25e708423d`. -H option of curl is used to set the Host header.
+
+Flag: `pwn.college{4Yysm8lFfbLrdXi7NwSAghdK1lC.dFzNyMDL1kTM2czW}`
+
+
+level5:
+commands used:
+1. `nc 127.0.0.1 80`
+2. `GET / HTTP/1.1` and press enter twice.
+3. `nc 127.0.0.1 80`
+4. `GET / HTTP/1.1
+    Host: 3884bcc93c73741fa6606f29cfef980a` and press enter twice
+
+Explanation: running `nc 127.0.0.1 80` and then `GET / HTTP/1.1` and press enter twice. Then it gives us a message saying that incorrect host and gives us the host to use here it is `3884bcc93c73741fa6606f29cfef980a`. now again connect to  `nc 127.0.0.1 80` and then 
+`GET / HTTP/1.1
+Host: 3884bcc93c73741fa6606f29cfef980a` and press enter twice to get the flag.
+
+Flag: `pwn.college{oqjz3medMvbvA_3zvsmYp1jSGmG.dJzNyMDL1kTM2czW}`
+
+
+level6:
+Script used:
+1.
+import requests
+response = requests.get('http://127.0.0.1:80')
+print(response.text) 
+
+2.
+import requests
+headers = {
+    'Host': '98347ce7e8b5519349184c1e1a7df123' 
+}
+response = requests.get('http://127.0.0.1:80', headers=headers)
+print(response.text)
+
+Explanation: after running the first script we get the host. In the 2nd script we will modify the default argument headers` to the get request. Then we get the final password
+
+Flag: `pwn.college{4PkdhmN4YNZC70tddJNQmYdqJKW.dNzNyMDL1kTM2czW}`
+
+
+level7:
+command used:
+1. `curl 127.0.0.1:80/7b15b4d644c569808ab1ef05cb14353e`
+
+Explanation: we will connect to the ip at port 80 and this time instead of going to the root directory we go to a specific place given be `/7b15b4d644c569808ab1ef05cb14353e` which is called path.
+
+Flag: `pwn.college{cvzjufnPDcUJ18u35lWGEYydqr0.dRzNyMDL1kTM2czW}`
+
+
+level8:
+command used:
+1. `nc 127.0.0.1 80`
+2. `GET / HTTP/1.0`
+3. `GET /e5e34296dbc73b675e7631a5cc942f48 HTTP/1.0`
+
+Explanation: we will connect to the ip at port 80 using nc. after the connection run `GET / HTTP/1.0` to get the path you should set. Then run this `GET /e5e34296dbc73b675e7631a5cc942f48 HTTP/1.0` to get the flag.
+
+Flag: `pwn.college{IGObQUnLrVhGlvehRNjoYP3UCIX.dVzNyMDL1kTM2czW}`
+
+
+level9:
+Script used:
+1.
+import requests
+response = requests.get('http://127.0.0.1:80')
+print(response.text)
+
+2.
+import requests
+response = requests.get('http://127.0.0.1:80/f7f5ee1763ef2e0f56de211fed8d7b22')
+print(response.text)
+
+Explanation: after running the first script we get the path. Use the path in the 2nd script. Then we get the flag in the response
+
+Flag: `pwn.college{sLPL_86qqVzT6FgQFAey-KdGyEJ.dZzNyMDL1kTM2czW}`
+
+
+level10:
+command used:
+1. `curl 127.0.0.1 80`
+2. `curl 127.0.0.1:80/b3d50775%20bdf8adb2%2fcb3e12e1%2001232d7c`
+
+Explanation: we will connect to the ip at port 80 using. after the connection we get the path to be set.use %20 for space and %2f for `/`. Then run this `curl 127.0.0.1:80/b3d50775%20bdf8adb2%2fcb3e12e1%2001232d7c` to get the flag.
+
+Flag: `pwn.college{0f4F3H83l89tyFhs5B-P27jCKqj.ddzNyMDL1kTM2czW}`
+
+
+level11:
+command used:
+1. `nc 127.0.0.1 80`
+2. `GET / HTTP/1.0`
+3. `GET /3a0f4489%2045b18380%2f1960d8fc%20ed59a905 HTTP/1.0`
+
+Explanation: we will connect to the ip at port 80 using nc. after the connection run `GET / HTTP/1.0` to get the path you should set. Then run this GET request with the url encodings `GET /3a0f4489%2045b18380%2f1960d8fc%20ed59a905 HTTP/1.0` to get the flag.
+
+Flag: `pwn.college{YPRqzZK42UySRRO6ugyPFYQfrm3.dhzNyMDL1kTM2czW}`
+
+
+level12:
+Script used:
+1.
+import requests
+response = requests.get('http://127.0.0.1:80')
+print(response.text)
+
+2.
+import requests
+response = requests.get('http://127.0.0.1:80/7643e885%2074fe0293%2f836e892e%2047e9c3db')
+print(response.text)
+
+Explanation: after running the first script we get the path. Encode the path and use it in the 2nd script. Then we get the flag in the response
+
+Flag: `pwn.college{wUYR4zcbZGHSOf9b9WgOmExx4P0.dlzNyMDL1kTM2czW}`
+
+
+level13:
+command used:
+1. `curl 127.0.0.1:80`
+2. `curl "127.0.0.1:80?a=8e99949638abf0ce192db928878cd61e"`
+
+Explanation: we will connect to the ip at port 80 using. after the connection we get the argument and its value that needs to be included. Now run `curl "127.0.0.1:80?a=8e99949638abf0ce192db928878cd61e"` to get the flag. ? means query selector part of the url starts. where we pass the argument
+
+Flag: `pwn.college{onWT4ATd5uWgBJQXOXREJRRshrT.dBDOyMDL1kTM2czW}`
+
+
+level14:
+command used:
+1. `nc 127.0.0.1 80`
+2. `GET / HTTP/1.0`
+3. `GET /?a=55839845162e0519f50f829b7149e8f9 HTTP/1.0`
+
+Explanation: we will connect to the ip at port 80 using nc. after the connection run `GET / HTTP/1.0` to get the argument and its value. Then run this GET request with the arguments added `GET /?a=55839845162e0519f50f829b7149e8f9 HTTP/1.0` to get the flag.
+
+Flag: `pwn.college{ct-vNDJMklj2_29yfyidIQHNSjd.dFDOyMDL1kTM2czW}`
+
+
+level15:
+Script used:
+1.
+import requests
+response = requests.get('http://127.0.0.1:80')
+print(response.text)
+
+2.
+import requests
+params={
+    'a': 'ead3ce96cb337506f95c2dae3c6811e7'
+}
+response = requests.get('http://127.0.0.1:80',params=params)
+print(response.text)
+
+Explanation: after running the first script we get the arguments to add. add the argument and its value to the params dictionary and use it in the get request . Then we get the flag in the response
+
+Flag: `pwn.college{UEHFp24NncTI_AATe7xlkPGJvRC.dJDOyMDL1kTM2czW}`
+
+
+level16:
+command used:
+1. `curl 127.0.0.1:80`
+2. `curl "127.0.0.1:80?a=1f5d18ad9437cf51c7af9b5afa5e943e"`
+3. `curl "127.0.0.1:80?a=1f5d18ad9437cf51c7af9b5afa5e943e&b=3ca29f45%20dae19de8%26e080293e%23ff836c4b"`
+
+Explanation: we will connect to the ip at port 80 using. after the connection we get the 1st argument a and its value that needs to be included. Now run `curl "127.0.0.1:80?a=8e99949638abf0ce192db928878cd61e"` to get the 2nd arrgument b and its value. use the encodings(%23 --> #, %26 --> &) and now run `curl "127.0.0.1:80?a=1f5d18ad9437cf51c7af9b5afa5e943e&b=3ca29f45%20dae19de8%26e080293e%23ff836c4b"` to get the flag. 
+
+Flag: `pwn.college{cUWD43YpJ6XTuw7TkJpXeEYwYlm.dNDOyMDL1kTM2czW}`
+
+
+level17:
+command used:
+1. `nc 127.0.0.1 80`
+2. `GET / HTTP/1.0`
+3. `GET /?a=b44d05fb9c2abe98bd46f61b7355b300 HTTP/1.0`
+4. `GET /?a=b44d05fb9c2abe98bd46f61b7355b300&b=085c6db8%2068b02b27%2697468d4a%2313eba2f3 HTTP/1.0`
+
+Explanation: we will connect to the ip at port 80 using nc. after the connection run `GET / HTTP/1.0` to get the argument and its value. Then run this GET request with the argument added `GET /?a=55839845162e0519f50f829b7149e8f9 HTTP/1.0` to get the next argument b and its value. now encode the whole url and send the GET request to get the flag.
+
+Flag: `pwn.college{wxofSNZPvO1zLrrtv7fFdiN-Hnm.dRDOyMDL1kTM2czW}`
+
+
+level18:
+Script used:
+1.
+import requests
+response = requests.get('http://127.0.0.1:80')
+print(response.text)
+
+2.
+import requests
+params={
+    'a': '01943df0237edcc2118e0da44854c02a'
+}
+response = requests.get('http://127.0.0.1:80',params=params)
+print(response.text)
+
+3.
+import requests
+params={
+    'a': '01943df0237edcc2118e0da44854c02a'
+    'b': '4ae105be 3a200093&9f00774a#e8abb577'
+}
+response = requests.get('http://127.0.0.1:80',params=params)
+print(response.text)
+
+Explanation: after running the first script we get the 1st argument to add. add the argument and its value to the params dictionary and use it in the get request to get the 2nd argument add it to the param.Now, run the 3rrd script to get the flag in the response
+
+Flag: `pwn.college{Itg76XDCVLxdJVn6UDOiY6tQRiy.dVDOyMDL1kTM2czW}`
