@@ -1,8 +1,0 @@
-The password for the next level is stored in a file called spaces in this filename located in the home directory
-
-1.ls
-2.cat "spaces in this filename" (This treats the file correctly)
-
-Note:
-we can also use \ for escaping a space
-"cat spaces\ in\ this\ filename"

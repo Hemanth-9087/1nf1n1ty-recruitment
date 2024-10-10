@@ -1,6 +1,0 @@
-The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.
-
-1.strings data.txt | grep "===="
-strings-> this command extracts readable strings  and it's output is sent to grep and it finds the line with ===
-
-FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey
