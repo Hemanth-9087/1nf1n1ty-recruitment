@@ -1,3 +1,96 @@
+level1:
+
+Code used: 
+
+.intel_syntax noprefix 
+.global _start 
+
+.section .text 
+_start: 
+    mov rdi, 0 
+    mov rax, 60 
+    syscall 
+.section .data
+
+Commands used:
+1. `as -o server.o test.s && ld -o server server.o`
+2. `/challenge/run ./server`
+
+Explanation: We write the required assembly code by refering to this document `https://x64.syscall.sh/` to know what values should be placed in the specific register to perform the exit syscall. Next we use this command `as -o server.o test.s && ld -o server server.o` as means assembler it creates an object file using the assembly code(test.s). and ld is GNU linker it links the object file and produces an executable server. use `/challenge/run ./server` to run the code.
+
+Flag: `pwn.college{8E0r-RaBGJUPp7KTdDbsyJPJtea.dBDNzMDL1kTM2czW}`
+
+
+level2:
+
+Code used: 
+.intel_syntax noprefix 
+.global _start 
+
+.section .text 
+_start: 
+    mov rax, 41 
+    mov rdi, 2
+    mov rsi, 1
+    syscall
+
+    mov rax, 60 
+    mov rdi, 0 
+    syscall 
+.section .data
+
+
+Commands used:
+1. `as -o server.o test.s && ld -o server server.o`
+2. `/challenge/run ./server`
+
+
+Explanation: We write the required assembly code by refering to this document `https://x64.syscall.sh/` to know what values should be placed in the specific register to perform the socket syscall and exit syscall.
+next we use this command `as -o server.o test.s && ld -o server server.o` as means assembler it creates an object file using the assembly code(test.s). and ld is GNU linker it links the object file and produces an executable server. use `/challenge/run ./server` to run the code.
+
+Flag: `pwn.college{QUlA_bnW6_h63W_lDLzMPTT_whz.dFDNzMDL1kTM2czW}`
+
+
+level3:
+
+Code used: 
+.intel_syntax noprefix 
+.global _start 
+
+.section .text 
+_start: 
+    mov rax, 41 
+    mov rdi, 2
+    mov rsi, 1
+    syscall
+
+    sub rsp, 16 
+    mov word ptr [rsp], 2 
+    mov word ptr [rsp+2], 0x5000 
+    mov dword ptr [rsp+4], 0 
+    mov qword ptr [rsp+8], 8 
+    mov rsi, rsp 
+    mov rdx, 16 
+    mov rdi, rax 
+    mov rax, 49 
+    syscall 
+    add rsp, 16
+
+    mov rax, 60 
+    mov rdi, 0 
+    syscall 
+.section .data
+
+Commands used:
+1. `as -o server.o test.s && ld -o server server.o`
+2. `/challenge/run ./server`
+
+
+Explanation: We write the required assembly code by refering to this document `https://x64.syscall.sh/` to know what values should be placed in the specific register to perform the socket syscall, bind sycall and exit syscall. See the documentations for the general syntax next we use this command `as -o server.o test.s && ld -o server server.o` as means assembler it creates an object file using the assembly code(test.s). and ld is GNU linker it links the object file and produces an executable server. use `/challenge/run ./server` to run the code.
+
+Flag: `pwn.college{EO3UH8jPpdaNPzx9-Ruq2IgNPuu.dJDNzMDL1kTM2czW}`
+
+
 level4:
 code used: 
 .intel_syntax noprefix 
@@ -42,7 +135,7 @@ Flag: `pwn.college{UGLFlqvZbc1gywcUgzixtJqIdae.dNDNzMDL1kTM2czW}`
 
 level5:
 code used: 
-.intel_syntax noprefix 
+.intel_syntax noprefix;
 .global _start 
 
 .section .text 
@@ -63,21 +156,967 @@ _start:
     mov rdi, rax 
     mov rax, 49 
     syscall 
-    add rsp, 16
+    
 
-    mov rdi, [rsp]
-    add rsp, 8
+    mov rdi, [rsp+16]
     mov rsi, 0
     mov rax, 0x32
-    syscall 
+    syscall
+
+    mov rax,0x2b
+    mov rsi, 0
+    mov rdi, [rsp+16]
+    mov rdx, 0
+    syscall
+
 
     mov rax, 60 
     mov rdi, 0 
     syscall 
 .section .data
 
-Explanation: Write the above assembly code by referring to the documentations for general syntax for the listen call, and to manipulate the register values refer https://x64.syscall.sh/. 
+Explanation: Write the above assembly code by referring to the documentations for general syntax for the listen call, accept, and to manipulate the register values refer https://x64.syscall.sh/. 
 
-Flag: `pwn.college{UGLFlqvZbc1gywcUgzixtJqIdae.dNDNzMDL1kTM2czW}`
+Flag: `pwn.college{0rGRWVzZMOErPw87YvIZr5I_gWl.dRDNzMDL1kTM2czW}`
 
 
+
+level6:
+code used: 
+.intel_syntax noprefix;
+.global _start 
+
+.section .rodata
+  msg:
+    .ascii "HTTP/1.0 200 OK\r\n\r\n" 
+
+.section .data
+    buf:
+    .quad msg 
+
+.section .bss              
+    buffer:    .space 200 
+    
+.section .text 
+_start:
+    #create_socket
+    mov rax, 41 
+    mov rdi, 2
+    mov rsi, 1
+    syscall
+    push rax
+
+    #bind_socket
+    sub rsp, 16 
+    mov word ptr [rsp], 2 
+    mov word ptr [rsp+2], 0x5000 
+    mov dword ptr [rsp+4], 0 
+    mov qword ptr [rsp+8], 8 
+    mov rsi, rsp 
+    mov rdx, 16 
+    mov rdi, rax 
+    mov rax, 49 
+    syscall 
+
+    #Listen_through_socket
+    mov rdi, [rsp+16]
+    mov rsi, 0
+    mov rax, 0x32
+    syscall
+
+    #accept_on_socket
+    mov rax,0x2b
+    mov rsi, 0
+    mov rdi, [rsp+16]
+    mov rdx, 0
+    syscall
+    push rax
+    
+    #read_fr0m_the_connection
+    mov rax, 0             
+    mov rdi,[rsp]            
+    lea rsi, [buffer]     
+    mov rdx, 200          
+    syscall       
+
+    #write_to_the_connection
+    mov rax, 1
+    pop rdi
+    mov rsi, [buf]
+    mov rdx, 19
+    syscall
+
+    #close_the_connection
+    mov rax, 3
+    syscall
+
+    #exit
+    mov rax, 60 
+    xor rdi, rdi  
+    syscall
+
+
+Explanation: Write the above assembly code by referring to the documentations for general syntax for the listen call,accept call, read call, write call,close call and to manipulate the register values refer https://x64.syscall.sh/. 
+
+Flag: `pwn.college{8QgkH6XeUvOAne2uUqXLWlWC6GI.dVDNzMDL1kTM2czW}`
+
+
+
+level7:
+code used: 
+.intel_syntax noprefix
+.globl _start
+
+.section .text
+
+_start:
+    #socket
+    mov rdi, 2
+    mov rsi, 1
+    mov rdx, 0
+    mov rax, 41
+    syscall
+
+    #bind
+    mov rdi, 3
+    mov word ptr [rsp], 2
+    mov word ptr [rsp+2], 0x5000
+    mov dword ptr [rsp+4], 0
+    mov qword ptr [rsp+8], 8
+    mov rsi, rsp
+    mov rdx, 16
+    mov rax, 0x31
+    syscall
+
+    #listen
+    mov rdi, 3
+    mov rsi, 0
+    mov rax, 0x32
+    syscall
+
+    #accept
+    mov rax, 0x2b
+    mov rdi, 3
+    mov rsi, 0
+    mov rdx, 0
+    syscall
+
+    # statically respond to http get request
+    mov rdi, 4
+    mov rsi, rsp
+    mov rdx, 256
+    mov rax, 0  # read syscall
+    syscall
+
+    #read
+    mov r10, rsp
+
+    #loop to traverse http request
+loop:
+    # looks for first ' '
+    mov al, [r10]
+    cmp al, ' '
+    je done
+    add r10, 1
+    jmp loop
+done:
+    add r10, 1
+
+    mov r11, r10
+    mov r12, 0
+
+loop2: #find second space
+    mov al, [r11]
+    cmp al, ' '
+    je done2
+    add r11, 1
+    add r12, 1
+    jmp loop2
+done2:
+    mov byte ptr [r11], 0
+
+    #open
+    mov rdi, r10
+    mov rsi, 0
+    mov rdx, 0
+    mov rax, 0x02
+    syscall
+
+    #read file
+    mov rdi, 5
+    mov rsi, r10
+    mov rdx, 256
+    mov rax, 0
+    syscall
+
+    mov rbx, rax
+
+    #close
+    mov rdi, 5
+    mov rsi, 0
+    mov rdx, 0
+    mov rax, 0x03
+    syscall
+
+    #write
+    mov rdi, 4
+    lea rsi, [http200]
+    mov rdx, 19
+    mov rax, 0x01
+    syscall
+
+    mov rdi, 4
+    mov rsi, r10
+    mov rdx, rbx
+    mov rax, 0x01
+    syscall
+
+    #close
+    mov rdi, 4
+    mov rsi, 0
+    mov rdx, 0
+    mov rax, 0x03
+    syscall
+
+    mov rdi, 0
+    mov rax, 60  # SYS_exit
+    syscall
+
+.section .data
+
+http200:
+    .ascii "HTTP/1.0 200 OK\r\n\r\n"
+
+httpget:
+    .ascii "GET /flag HTTP/1.0\r\n\r\n"
+
+
+Explanation: Write the above assembly code by referring to the documentations for general syntax for the listen call, accept call, read call, open call, write call, close call and to manipulate the register values refer https://x64.syscall.sh/. 
+
+Flag: `pwn.college{Ype-Xn6XL8QnVHYsIa0A8133E2b.dZDNzMDL1kTM2czW}`
+
+
+level8:
+code used: 
+.intel_syntax noprefix
+.globl _start
+
+.section .text
+
+_start:
+    #socket
+    mov rdi, 2
+    mov rsi, 1
+    mov rdx, 0
+    mov rax, 41
+    syscall
+
+    #bind
+    mov rdi, 3
+    mov word ptr [rsp], 2
+    mov word ptr [rsp+2], 0x5000
+    mov dword ptr [rsp+4], 0
+    mov qword ptr [rsp+8], 8
+    mov rsi, rsp
+    mov rdx, 16
+    mov rax, 0x31
+    syscall
+
+    #listen
+    mov rdi, 3
+    mov rsi, 0
+    mov rax, 0x32
+    syscall
+
+    #accept
+    mov rax, 0x2b
+    mov rdi, 3
+    mov rsi, 0
+    mov rdx, 0
+    syscall
+
+    # statically respond to http get request
+    mov rdi, 4
+    mov rsi, rsp
+    mov rdx, 256
+    mov rax, 0  # read syscall
+    syscall
+
+    #read
+    mov r10, rsp
+
+    #loop to traverse http request
+loop:
+    # looks for first ' '
+    mov al, [r10]
+    cmp al, ' '
+    je done
+    add r10, 1
+    jmp loop
+done:
+    add r10, 1
+
+    mov r11, r10
+    mov r12, 0
+
+loop2: #find second space
+    mov al, [r11]
+    cmp al, ' '
+    je done2
+    add r11, 1
+    add r12, 1
+    jmp loop2
+done2:
+    mov byte ptr [r11], 0
+
+    #open
+    mov rdi, r10
+    mov rsi, 0
+    mov rdx, 0
+    mov rax, 0x02
+    syscall
+
+    #read file
+    mov rdi, 5
+    mov rsi, r10
+    mov rdx, 256
+    mov rax, 0
+    syscall
+
+    mov rbx, rax
+
+    #close
+    mov rdi, 5
+    mov rsi, 0
+    mov rdx, 0
+    mov rax, 0x03
+    syscall
+
+    #write
+    mov rdi, 4
+    lea rsi, [http200]
+    mov rdx, 19
+    mov rax, 0x01
+    syscall
+
+    mov rdi, 4
+    mov rsi, r10
+    mov rdx, rbx
+    mov rax, 0x01
+    syscall
+
+    #close
+    mov rdi, 4
+    mov rsi, 0
+    mov rdx, 0
+    mov rax, 0x03
+    syscall
+
+    #accept
+    mov rax, 0x2b
+    mov rdi, 3
+    mov rsi, 0
+    mov rdx, 0
+    syscall
+
+    mov rdi, 0
+    mov rax, 60  # SYS_exit
+    syscall
+
+.section .data
+
+http200:
+    .ascii "HTTP/1.0 200 OK\r\n\r\n"
+
+httpget:
+    .ascii "GET /flag HTTP/1.0\r\n\r\n"
+
+
+Explanation: Write the above assembly code by referring to the documentations for general syntax for the listen call, accept call, read call, open call, write call, close call and to manipulate the register values refer https://x64.syscall.sh/. 
+
+Flag: `pwn.college{ocSvmCS7aeb-qNprg3SGZ8Lbuwu.ddDNzMDL1kTM2czW}`
+
+
+
+level9:
+code used: 
+.intel_syntax noprefix
+.globl _start
+
+.section .text
+
+_start:
+    # Create a socket
+    mov rdi, 2               
+    mov rsi, 1             
+    mov rdx, 0                 
+    mov rax, 41          
+    syscall
+
+    # Bind the socket
+    mov rdi, 3               
+    mov word ptr [rsp], 2     
+    mov word ptr [rsp+2], 0x5000 
+    mov dword ptr [rsp+4], 0 
+    mov qword ptr [rsp+8], 8  
+    mov rsi, rsp              
+    mov rdx, 16               
+    mov rax, 0x31           
+    syscall
+
+    # Listen for connections
+    mov rdi, 3                
+    mov rsi, 0                 
+    mov rax, 0x32           
+    syscall
+
+accept_loop:
+    # Accept a connection
+    mov rax, 0x2b          
+    mov rdi, 3                
+    mov rsi, 0             
+    mov rdx, 0               
+    syscall                 
+
+    # Store the client socket descriptor
+    mov r8, rax             
+
+    # Fork a new process to handle the client request
+    mov rax, 57            
+    syscall
+
+    # Check if we're in the child or parent process
+    test rax, rax              # Check if rax == 0 (child process)
+    je handle_request          # If child process, handle the request
+
+    # Close client socket in parent process
+    mov rdi, r8              
+    mov rax, 0x03            
+    syscall                  
+
+    # Loop back to accept more connections
+    jmp accept_loop
+
+handle_request:
+    # Close the listening socket in child process
+    mov rdi, 3               
+    mov rax, 0x03            
+    syscall
+
+    # Read the HTTP request from the client
+    mov rdi, r8              
+    mov rsi, rsp           
+    mov rdx, 256           
+    mov rax, 0                 # sys_read syscall
+    syscall
+
+    # Store the buffer in r10 for parsing
+    mov r10, rsp
+
+    # Parse the HTTP request to find the file path
+parse_request:
+    # Find the first space
+loop1:
+    mov al, [r10]        
+    cmp al, ' '             
+    je found_space1         
+    add r10, 1          
+    jmp loop1                  # Loop
+
+found_space1:
+    add r10, 1                 # Skip the space
+
+    # Set rdi to point to the start of the path
+    mov rdi, r10              
+
+    # Find the second space
+loop2:
+    mov al, [r10]             
+    cmp al, ' '                
+    je found_space2       
+    add r10, 1              
+    jmp loop2               
+
+found_space2:
+    mov byte ptr [r10], 0      # Null-terminate the path
+
+    # Open the requested file
+    mov rdi, rdi               
+    mov rsi, 0               
+    mov rdx, 0                 # Mode (ignored)
+    mov rax, 0x02              # sys_open syscall
+    syscall
+
+    # Save file descriptor
+    mov r11, rax
+
+    # Check if file was opened
+    cmp rax, -1                # Check for error
+    je send_404                # If error, send 404 response
+
+    # Read the file contents
+    mov rdi, r11             
+    mov rsi, rsp               
+    mov rdx, 256            
+    mov rax, 0                 # sys_read syscall
+    syscall
+
+    # Store the number of bytes read
+    mov rbx, rax
+
+    # Close the file
+    mov rax, 0x03              # sys_close syscall
+    syscall
+
+    # Send HTTP 200 OK response
+    mov rdi, r8              
+    lea rsi, [http200]     
+    mov rdx, 19                # Response length
+    mov rax, 0x01              # sys_write syscall
+    syscall
+
+    # Send the file contents
+    mov rdi, r8             
+    mov rsi, rsp          
+    mov rdx, rbx             
+    mov rax, 0x01              # sys_write syscall
+    syscall
+
+    # Close the client socket
+    mov rdi, r8               
+    mov rax, 0x03              # sys_close syscall
+    syscall
+
+    # Exit the child process
+    mov rdi, 0              
+    mov rax, 60                # sys_exit syscall
+    syscall
+
+send_404:
+    # Send 404 Not Found response
+    mov rdi, r8              
+    lea rsi, [http404]     
+    mov rdx, 24             
+    mov rax, 0x01              # sys_write syscall
+    syscall
+
+    # Close the client socket
+    mov rdi, r8               
+    mov rax, 0x03              # sys_close syscall
+    syscall
+
+    # Exit the child process
+    mov rdi, 0              
+    mov rax, 60                # sys_exit syscall
+    syscall
+
+.section .data
+
+http200:
+    .ascii "HTTP/1.0 200 OK\r\n\r\n"
+
+http404:
+    .ascii "HTTP/1.0 404 Not Found\r\n\r\n"
+
+
+Explanation: Write the above assembly code by referring to the documentations for general syntax for the listen call, accept call, read call, open call, write call, close call, fork call and to manipulate the register values refer https://x64.syscall.sh/. 
+
+Flag: `pwn.college{ghMintX32MHEfDWZABPsRXeIAWQ.dhDNzMDL1kTM2czW}`
+
+
+
+level10:
+code used: 
+.intel_syntax noprefix
+.globl _start
+
+.section .text
+
+_start:
+    # Create socket
+    mov rdi, 2              # AF_INET
+    mov rsi, 1              # SOCK_STREAM
+    xor rdx, rdx            # Protocol 0
+    mov rax, 41             # sys_socket
+    syscall
+
+    # Save listening socket
+    mov r9, rax
+
+    # Bind socket
+    mov rdi, r9
+    mov word ptr [rsp], 2           # AF_INET
+    mov word ptr [rsp+2], 0x5000    # Port 80
+    xor dword ptr [rsp+4], edx      # INADDR_ANY
+    xor qword ptr [rsp+8], rdx      # Zero padding
+    mov rsi, rsp
+    mov rdx, 16
+    mov rax, 49             # sys_bind
+    syscall
+
+    # Listen
+    mov rdi, r9
+    xor rsi, rsi            # Backlog 0
+    mov rax, 50             # sys_listen
+    syscall
+
+accept_loop:
+    # Accept connection
+    mov rax, 43             # sys_accept
+    mov rdi, r9
+    xor rsi, rsi            # addr NULL
+    xor rdx, rdx            # addrlen NULL
+    syscall
+
+    # Save client socket
+    mov r8, rax
+
+    # Fork
+    mov rax, 57             # sys_fork
+    syscall
+
+    cmp rax, 0
+    je handle_request       # Child process
+
+    # Parent process
+    mov rdi, r8             # Close client socket
+    mov rax, 3              # sys_close
+    syscall
+    jmp accept_loop
+
+handle_request:
+    # Child process
+    mov rdi, r9             # Close listening socket
+    mov rax, 3              # sys_close
+    syscall
+
+    # Read request
+    mov rdi, r8             # Client socket
+    mov rsi, rsp            # Buffer
+    mov rdx, 8192           # Buffer size
+    mov rax, 0              # sys_read
+    syscall
+
+    # Save bytes read
+    mov r13, rax
+
+    mov r10, rsp            # Pointer to buffer start
+
+    # Skip 'POST '
+    add r10, 5
+
+    # Extract file path
+    mov rdi, r10
+find_space_after_path:
+    cmp byte ptr [r10], ' '
+    je path_terminated
+    inc r10
+    jmp find_space_after_path
+path_terminated:
+    mov byte ptr [r10], 0
+
+    # Find end of headers '\r\n\r\n'
+    mov rsi, rsp
+    mov rcx, r13
+    sub rcx, 4
+find_body:
+    cmp dword ptr [rsi], 0x0A0D0A0D
+    je body_found
+    inc rsi
+    loop find_body
+    # If not found
+    jmp open_failed
+
+body_found:
+    add rsi, 4              # Start of body
+
+    # Save body pointer
+    mov r14, rsi            # Save rsi (body pointer) into r14
+
+    # Calculate offset to body
+    mov rax, rsi
+    sub rax, rsp            # rax = rsi - rsp (offset to body)
+
+    # Calculate body length
+    mov rdx, r13            # rdx = total bytes read
+    sub rdx, rax            # rdx = rdx - offset (body length)
+
+    # Save body length
+    mov r15, rdx            # Save body length in r15
+
+    # Open file
+    mov rsi, 65             # rsi = O_WRONLY | O_CREAT
+    mov rdx, 511            # rdx = mode 0777
+    mov rax, 2              # sys_open
+    syscall
+
+    # Save file descriptor
+    mov r12, rax
+
+    # Check open success
+    cmp rax, -1
+    je open_failed
+
+    # Restore body length
+    mov rdx, r15            # Restore body length to rdx
+
+    # Write body to file
+    mov rdi, r12            # rdi = file descriptor
+    mov rsi, r14            # rsi = pointer to body
+    mov rax, 1              # sys_write
+    syscall
+
+    # Close file
+    mov rdi, r12
+    mov rax, 3              # sys_close
+    syscall
+
+    # Send HTTP 200 OK
+    mov rdi, r8             # Client socket
+    lea rsi, [http200]
+    mov rdx, 19
+    mov rax, 1              # sys_write
+    syscall
+
+    # Close client socket
+    mov rdi, r8
+    mov rax, 3              # sys_close
+    syscall
+
+    # Exit child process
+    xor rdi, rdi            # Exit code 0
+    mov rax, 60             # sys_exit
+    syscall
+
+open_failed:
+    # Send 404 Not Found
+    mov rdi, r8
+    lea rsi, [http404]
+    mov rdx, 24
+    mov rax, 1              # sys_write
+    syscall
+
+    # Close client socket
+    mov rdi, r8
+    mov rax, 3              # sys_close
+    syscall
+
+    # Exit child process
+    xor rdi, rdi
+    mov rax, 60             # sys_exit
+    syscall
+
+.section .data
+
+http200:
+    .ascii "HTTP/1.0 200 OK\r\n\r\n"
+
+http404:
+    .ascii "HTTP/1.0 404 Not Found\r\n\r\n"
+
+
+
+Explanation: Write the above assembly code by referring to the documentations for general syntax for the listen call, accept call, read call, open call, write call, close call, fork call and to manipulate the register values refer https://x64.syscall.sh/. We must carefull calculate the length of the contents of the file and offset for the rsp to write correctly into the file
+
+Flag: `pwn.college{o9YG7yJcRuB9R4U0KOir5I1vcPT.dlDNzMDL1kTM2czW}`
+
+
+level11:
+code used: 
+.intel_syntax noprefix
+.globl _start
+
+.section .text
+
+_start:
+    # socket(AF_INET, SOCK_STREAM, 0) = 2, 1, 0
+    mov rdi, 2                  # AF_INET
+    mov rsi, 1                  # SOCK_STREAM
+    mov rdx, 0                  # Protocol 0 (default)
+    mov rax, 41                 # SYS_socket
+    syscall
+
+    # bind(3, &sockaddr, 16)
+    mov rdi, rax                # Socket fd = 3
+    lea rsi, [sockaddr]         # Pointer to sockaddr structure
+    mov rdx, 16                 # Size of sockaddr
+    mov rax, 49                 # SYS_bind
+    syscall
+
+    # listen(3, 0) = 0
+    mov rdi, 3                  # Socket fd
+    mov rsi, 0                  # Backlog size
+    mov rax, 50                 # SYS_listen
+    syscall
+
+    # accept(3, NULL, NULL)
+    mov rdi, 3
+    lea rsi, [0]                # NULL sockaddr
+    lea rdx, [0]                # NULL int
+    mov rax, 43                 # SYS_accept
+    syscall
+
+parentjump:
+    # fork()
+    mov rax, 57                 # SYS_fork
+    syscall
+
+    # Check if child or parent process
+    cmp rax, 0
+    jne parent                  # If not 0, jump to parent section
+
+    # Close socket in child
+    mov rdi, 3
+    mov rax, 3                  # SYS_close
+    syscall
+
+    # Read HTTP request from socket
+    mov rdi, 4                  # Client fd
+    mov rsi, rsp                # Buffer on stack
+    mov rdx, 512                # Read 512 bytes
+    mov rax, 0                  # SYS_read
+    syscall
+
+    mov r14, rax                # Store content size in r14
+    mov r10, rsp                # Set r10 to buffer start
+
+loop:
+    mov al, [r10]
+    cmp al, ' '                 # Check for space
+    je done
+    add r10, 1
+    jmp loop
+
+done:
+    add r10, 1                  # Move to byte after space
+    mov r11, r10
+    mov r12, 0
+
+loop2:                          # Find next space
+    mov al, [r11]
+    cmp al, ' '
+    je done2
+    add r11, 1
+    add r12, 1
+    jmp loop2
+
+done2:
+    mov byte ptr [r11], 0       # Null-terminate path
+    cmp byte ptr [rsp], 'G'
+    je GET
+
+POST:
+    # Open file for writing (O_WRONLY | O_CREAT)
+    mov rdi, r10                # File path
+    mov rsi, 0x41               # O_WRONLY | O_CREAT
+    mov rdx, 0777               # Permissions 0777
+    mov rax, 2                  # SYS_open
+    syscall
+
+    # Search for \r\n\r\n (0x0d0a0d0a)
+    mov r13, rsp
+
+loop3:
+    mov eax, [r13]
+    cmp eax, 0x0a0d0a0d
+    je equal
+    add r13, 1
+    sub r14, 1
+    jmp loop3
+
+equal:
+    add r13, 4
+    sub r14, 4
+
+    # Write content to socket
+    mov rdi, 3                  # Socket fd
+    mov rsi, r13                # Content pointer
+    mov rdx, r14                # Content size
+    mov rax, 1                  # SYS_write
+    syscall
+
+    # Close socket
+    mov rdi, 3
+    mov rax, 3                  # SYS_close
+    syscall
+
+    # Send HTTP response
+    mov rdi, 4                  # Client fd
+    lea rsi, [getresponse]      # HTTP response string
+    mov rdx, 19                 # Length of response
+    mov rax, 1                  # SYS_write
+    syscall
+
+GET:
+    # Open file for reading (O_RDONLY)
+    mov rdi, r10                # File path
+    mov rsi, 0                  # Flags O_RDONLY
+    mov rdx, 0x0                # No permissions needed
+    mov rax, 2                  # SYS_open
+    syscall
+
+    # Read from file
+    mov rdi, 3                  # File descriptor
+    mov rsi, r10                # Buffer to store content
+    mov rdx, 512                # Read 512 bytes
+    mov rax, 0                  # SYS_read
+    syscall
+
+    mov rbx, rax                # Store size of file in rbx
+
+    # Close file
+    mov rdi, 3
+    mov rax, 3                  # SYS_close
+    syscall
+
+    # Send HTTP response header
+    mov rdi, 4
+    lea rsi, [getresponse]
+    mov rdx, 19
+    mov rax, 1                  # SYS_write
+    syscall
+
+    # Send file content
+    mov rdi, 4
+    mov rsi, r10                # File content pointer
+    mov rdx, rbx                # File content size
+    mov rax, 1                  # SYS_write
+    syscall
+
+    # Exit child process
+    mov rdi, 0
+    mov rax, 60                 # SYS_exit
+    syscall
+
+parent:
+    # Close client socket in parent
+    mov rdi, 4
+    mov rax, 3                  # SYS_close
+    syscall
+
+    # Accept new connection
+    mov rdi, 3
+    lea rsi, [0]                # NULL sockaddr
+    lea rdx, [0]                # NULL int
+    mov rax, 43                 # SYS_accept
+    syscall
+
+    jmp parentjump
+
+.section .data
+
+sockaddr:
+    .2byte 2                    # AF_INET
+    .byte 0                     # Padding
+    .byte 80                    # Port 80 (HTTP)
+    .4byte 0                    # INADDR_ANY (0.0.0.0)
+    .8byte 0                    # Padding
+
+getresponse:
+    .string "HTTP/1.0 200 OK\r\n\r\n"
+
+
+
+Explanation: Write the above assembly code by referring to the documentations for general syntax for the listen call, accept call, read call, open call, write call, close call, fork call and to manipulate the register values refer https://x64.syscall.sh/.Find the given request(POST OR GET) We must carefully calculate the length of the contents of the file and offset for the rsp to write correctly into the file
+
+Flag: `pwn.college{AVWMrAzzHRRREHjAhaWUcDo-42U.dBTNzMDL1kTM2czW}`
