@@ -9,10 +9,6 @@ Welcome to my **1nf1n1ty Recruitment 2024** repository! This repository showcase
   - [Task 1: OverTheWire Bandit Wargames](#task-1-overthewire-bandit-wargames)
   - [Task 2: PWN College Modules](#task-2-pwn-college-modules)
   - [Task 3: Data Encoder and Decoder using Python](#task-3-data-encoder-and-decoder-using-python)
-- [Repository Structure](#repository-structure)
-- [Usage](#usage)
-- [Acknowledgements](#acknowledgements)
-- [Contact](#contact)
 
 ## About Me
 
