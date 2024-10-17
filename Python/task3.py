@@ -156,4 +156,5 @@ def main():
     else:
         interactive_mode()
 
-main()
+if __name__ == "__main__":
+    main()
