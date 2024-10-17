@@ -23,9 +23,6 @@ def decode_base64(encoded_text):
         if char in BASE64_CHARS:
             index = BASE64_CHARS.index(char)
             binary_str += format(index, '06b')
-        else:
-            print("Error: Invalid Base64 character detected.")
-            sys.exit(1)
     decoded = ''
     for i in range(0, len(binary_str), 8):
         byte = binary_str[i:i+8]
@@ -44,11 +41,7 @@ def decode_hex(encoded_text):
     decoded = ''
     for i in range(0, len(encoded_text), 2):
         byte = encoded_text[i:i+2]
-        try:
-            decoded += chr(int(byte, 16))
-        except ValueError:
-            print("Error: Invalid hexadecimal input.")
-            sys.exit(1)
+        decoded += chr(int(byte, 16))
     return decoded
 
 def encode_binary(text):
@@ -79,11 +72,7 @@ def decode_octal(encoded_text):
         if len(octal) != 3 or not octal.isdigit():
             print("Error: Each octal value must be 3 digits long and contain only numbers.")
             sys.exit(1)
-        try:
-            decoded += chr(int(octal, 8))
-        except ValueError:
-            print("Error: Invalid octal input.")
-            sys.exit(1)
+        decoded += chr(int(octal, 8))
     return decoded
 
 def interactive_mode():
@@ -148,7 +137,6 @@ def command_line_mode(mode, scheme, text):
     print(result)
 
 def parse_arguments():
-    """Parses command-line arguments."""
     parser = argparse.ArgumentParser(description="Simple Data Encoder and Decoder")
     parser.add_argument('mode', nargs='?', help="Mode: encode or decode")
     parser.add_argument('scheme', nargs='?', help="Scheme: b64, hex, bin, oct")
@@ -168,5 +156,4 @@ def main():
     else:
         interactive_mode()
 
-if __name__ == "__main__":
-    main()
+main()
