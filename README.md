@@ -1,6 +1,6 @@
 # 1nf1n1ty Recruitment 2024 - [Hemanth.G]
 
-Welcome to my **1nf1n1ty Recruitment 2024** repository! This repository showcases the completion of the recruitment tasks designed to demonstrate my cybersecurity skills and proficiency in Linux command-line operations. Below, you'll find detailed documentation of each task, along with the repository structure and instructions on how to navigate through my work.
+Welcome to my **1nf1n1ty Recruitment 2024** repository! This repository showcases the completion of the recruitment tasks designed to demonstrate my cybersecurity skills and proficiency in Linux command-line operations. Below, you'll find detailed documentation of each task.
 
 ## Table of Contents
 
