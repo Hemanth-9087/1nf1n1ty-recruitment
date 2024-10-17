@@ -16,7 +16,7 @@ Welcome to my **1nf1n1ty Recruitment 2024** repository! This repository showcase
 
 ## About Me
 
-Hello! I'm [Your Name], a passionate cybersecurity enthusiast with a strong foundation in Linux systems and Python programming. I thrive on solving complex challenges and continuously seek opportunities to enhance my skills in cybersecurity and ethical hacking.
+Hello! I'm Hemanth, a passionate cybersecurity enthusiast with a strong foundation in Linux systems and Python programming. I thrive on solving complex challenges and continuously seek opportunities to contribute to the field of cybersecurity.
 
 ## Tasks Completed
 
@@ -36,7 +36,7 @@ The Bandit Wargames provided a structured environment to hone my Linux command-l
 **Repository Details:**
 - **Folder:** `Bandit-Games`
 - **Contents:**  
-  - Write-ups for all 34 levels (`level0.md` to `level34.md`), detailing the approach, commands used, and explanations for each solution.
+  - Write-ups for all 34 levels, detailing the approach, commands used, and explanations for each solution.
   - Scripts and command logs where applicable.
 
 ### Task 2: PWN College Modules
@@ -60,7 +60,7 @@ PWN College provided comprehensive modules that deepened my understanding of web
 **Repository Details:**
 - **Folder:** `PWN-College`
 - **Contents:**  
-  - Detailed write-ups for each completed module (`talking-web.md`, `building-web-server.md`, `web-security.md`), including challenges faced and solutions implemented.
+  - Detailed write-ups for each completed module (`talking-web`, `building-web-server`, `web-security`), including challenges faced and solutions implemented.
   - Relevant code snippets and command usage examples.
 
 ### Task 3: Data Encoder and Decoder using Python
@@ -76,15 +76,4 @@ Understanding data encoding and decoding is crucial in cybersecurity, especially
 - Interactive command-line interface for user inputs.
 - Bonus: Ability to handle command-line arguments for streamlined operations.
 
-**Sample Usage:**
-```bash
-$ python task3.py
-Enter 1 for encode or 2 for decode : 2
-Menu
-1) Base64
-2) Hexadecimal
-3) Binary
-4) Octal
-Enter the encoding scheme : 1
-Enter encoded text : MW5mMW4xdHk=
-Decoded Text : 1nf1n1ty
+
