@@ -51,7 +51,6 @@ PWN College provided comprehensive modules that deepened my understanding of web
 **Key Achievements:**
 - Enhanced understanding of web server architecture and security best practices.
 - Identified and exploited SQL injection vulnerabilities, reinforcing secure coding practices.
-- Completed additional modules beyond the required scope, earning bonus points.
 
 **Repository Details:**
 - **Folder:** `PWN-College`
