@@ -1,72 +1,84 @@
-# 1nf1n1ty Recruitment 2024
+# 1nf1n1ty Recruitment 2024 - [Your Name]
 
-Welcome to the **1nf1n1ty Recruitment 2024** repository! This project showcases the completion of various cybersecurity tasks designed to test and enhance hacking skills. Below, you'll find detailed information about each task, the structure of the repository, and instructions on how to navigate through the provided materials.
+Welcome to my **1nf1n1ty Recruitment 2024** repository! This repository showcases the completion of the recruitment tasks designed to demonstrate my cybersecurity skills and proficiency in Linux command-line operations. Below, you'll find detailed documentation of each task, along with the repository structure and instructions on how to navigate through my work.
 
 ## Table of Contents
 
-- [Overview](#overview)
+- [About Me](#about-me)
 - [Tasks Completed](#tasks-completed)
   - [Task 1: OverTheWire Bandit Wargames](#task-1-overthewire-bandit-wargames)
   - [Task 2: PWN College Modules](#task-2-pwn-college-modules)
   - [Task 3: Data Encoder and Decoder using Python](#task-3-data-encoder-and-decoder-using-python)
 - [Repository Structure](#repository-structure)
 - [Usage](#usage)
-- [Contributing](#contributing)
+- [Acknowledgements](#acknowledgements)
 - [Contact](#contact)
 
-## Overview
+## About Me
 
-Do you have what it takes to be a hacker? This recruitment process is designed to challenge your cybersecurity and Linux command-line skills through a series of tasks. Successfully completing these tasks demonstrates your proficiency and readiness to join the 1nf1n1ty team.
+Hello! I'm [Your Name], a passionate cybersecurity enthusiast with a strong foundation in Linux systems and Python programming. I thrive on solving complex challenges and continuously seek opportunities to enhance my skills in cybersecurity and ethical hacking.
 
 ## Tasks Completed
 
 ### Task 1: OverTheWire Bandit Wargames
 
-**Objective:** Complete all 34 levels in the Bandit section of [OverTheWire's Bandit Wargames](https://overthewire.org/wargames/bandit/).
+**Objective:**  
+Complete all 34 levels in the Bandit section of [OverTheWire's Bandit Wargames](https://overthewire.org/wargames/bandit/).
 
-**Description:**  
-OverTheWire's Bandit Wargames is an online platform aimed at helping beginners develop and enhance their skills in Linux command-line and cybersecurity. Each level requires the use of various Linux commands and SSH to interact with remote servers and solve challenges.
+**Overview:**  
+The Bandit Wargames provided a structured environment to hone my Linux command-line skills and understand fundamental cybersecurity concepts. Each level presented unique challenges that required the use of various Linux commands and SSH for remote server interactions.
 
-**Skills Acquired:**
-- Proficiency with SSH
-- Mastery of Linux commands such as `cat`, `du`, `ls`, `find`, etc.
-- Problem-solving and documentation
+**Key Achievements:**
+- Mastered SSH usage for secure connections.
+- Gained proficiency in essential Linux commands such as `cat`, `du`, `ls`, `find`, and more.
+- Developed problem-solving strategies to navigate through progressively complex levels.
 
 **Repository Details:**
 - **Folder:** `Bandit-Games`
-- **Contents:** Write-ups for all 34 levels, detailing the commands used and the reasoning behind each solution.
+- **Contents:**  
+  - Write-ups for all 34 levels (`level0.md` to `level34.md`), detailing the approach, commands used, and explanations for each solution.
+  - Scripts and command logs where applicable.
 
 ### Task 2: PWN College Modules
 
-**Objective:** Complete the first three modules in the [PWN College Intro to Cybersecurity](https://pwn.college/intro-to-cybersecurity/) section.
+**Objective:**  
+Complete the first three modules in the [PWN College Intro to Cybersecurity](https://pwn.college/intro-to-cybersecurity/) section.
 
 **Modules Completed:**
 1. **Talking-Web** (up to level 18)
 2. **Building a Web Server**
 3. **Web Security** (up to SQLi5)
 
-**Bonus:** Additional modules completed beyond the required levels.
+**Overview:**  
+PWN College provided comprehensive modules that deepened my understanding of web security, server building, and SQL injection vulnerabilities. Through hands-on exercises, I was able to apply theoretical knowledge to practical scenarios.
 
-**Skills Acquired:**
-- Understanding of web security principles
-- Hands-on experience with building and securing web servers
-- Proficiency in identifying and exploiting SQL injection vulnerabilities
+**Key Achievements:**
+- Enhanced understanding of web server architecture and security best practices.
+- Identified and exploited SQL injection vulnerabilities, reinforcing secure coding practices.
+- Completed additional modules beyond the required scope, earning bonus points.
 
 **Repository Details:**
 - **Folder:** `PWN-College`
-- **Contents:** Comprehensive write-ups for each completed module, including commands used and explanations.
+- **Contents:**  
+  - Detailed write-ups for each completed module (`talking-web.md`, `building-web-server.md`, `web-security.md`), including challenges faced and solutions implemented.
+  - Relevant code snippets and command usage examples.
 
 ### Task 3: Data Encoder and Decoder using Python
 
-**Objective:** Develop a Python tool capable of encoding and decoding data using various schemes without the assistance of generative AI tools.
+**Objective:**  
+Develop a Python tool capable of encoding and decoding data using various schemes without the assistance of generative AI tools.
 
-**Requirements:**
-- Support for encoding/decoding using Base64, Hexadecimal, Binary, and Octal.
-- Ability to take inputs via command line arguments (Bonus).
+**Overview:**  
+Understanding data encoding and decoding is crucial in cybersecurity, especially in Capture The Flag (CTF) competitions. I developed a Python script that supports multiple encoding schemes, facilitating quick data transformations during security assessments.
+
+**Features:**
+- Supports Base64, Hexadecimal, Binary, and Octal encoding/decoding.
+- Interactive command-line interface for user inputs.
+- Bonus: Ability to handle command-line arguments for streamlined operations.
 
 **Sample Usage:**
 ```bash
-cmd> python task3.py
+$ python task3.py
 Enter 1 for encode or 2 for decode : 2
 Menu
 1) Base64
