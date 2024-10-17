@@ -61,7 +61,7 @@ PWN College provided comprehensive modules that deepened my understanding of web
 ### Task 3: Data Encoder and Decoder using Python
 
 **Objective:**  
-Develop a Python tool capable of encoding and decoding data using various schemes without the assistance of generative AI tools.
+Develop a Python tool capable of encoding and decoding data using various schemes.
 
 **Overview:**  
 Understanding data encoding and decoding is crucial in cybersecurity, especially in Capture The Flag (CTF) competitions. I developed a Python script that supports multiple encoding schemes, facilitating quick data transformations during security assessments.
